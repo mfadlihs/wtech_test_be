@@ -1,98 +1,398 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Wintech API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A NestJS-based REST API for managing and serving image data with comprehensive Swagger documentation and standardized response formatting.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 📋 Table of Contents
 
-## Description
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Running the Application](#running-the-application)
+- [API Documentation](#api-documentation)
+- [API Endpoints](#api-endpoints)
+- [Response Format](#response-format)
+- [Error Handling](#error-handling)
+- [Testing](#testing)
+- [Development](#development)
+- [License](#license)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🔍 Overview
 
-## Project setup
+The Wintech API is a robust backend service built with NestJS that provides endpoints for managing and retrieving image data. It features automatic API documentation with Swagger, standardized response formatting, comprehensive error handling, and CORS support for frontend integration.
 
-```bash
-$ npm install
+## ✨ Features
+
+- **RESTful API** - Clean and intuitive REST endpoints
+- **Swagger Documentation** - Auto-generated API documentation at `/docs`
+- **Standardized Responses** - Consistent response format across all endpoints
+- **Error Handling** - Comprehensive error handling with custom filters
+- **CORS Support** - Cross-origin resource sharing enabled
+- **TypeScript** - Full TypeScript support for type safety
+- **Validation** - Input validation with built-in pipes
+- **Modular Architecture** - Well-organized modular structure
+
+## 🛠 Tech Stack
+
+- **Framework**: [NestJS](https://nestjs.com/) v11.0.1
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Documentation**: [Swagger/OpenAPI](https://swagger.io/)
+- **Testing**: [Jest](https://jestjs.io/)
+- **Linting**: [ESLint](https://eslint.org/) + [Prettier](https://prettier.io/)
+
+## 📁 Project Structure
+
+```
+src/
+├── common/                 # Shared utilities and components
+│   ├── dto/               # Data Transfer Objects
+│   │   ├── api-response.dto.ts
+│   │   └── image.dto.ts
+│   ├── filters/           # Exception filters
+│   │   └── http-exception.filter.ts
+│   └── interceptors/      # Response interceptors
+│       └── response.interceptor.ts
+├── datas/                 # Data layer
+│   └── data.ts
+├── app.controller.ts      # Main application controller
+├── app.module.ts         # Root application module
+├── app.service.ts        # Main application service
+├── main.ts              # Application bootstrap
+└── wintechData.json     # Sample image data
 ```
 
-## Compile and run the project
+## 🚀 Installation
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18 or higher)
+- [npm](https://www.npmjs.com/) (v9 or higher)
+
+### Setup
+
+1. **Clone the repository**
+
+   ```bash
+   git clone <repository-url>
+   cd be
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Environment Configuration**
+
+   Create a `.env` file in the root directory (optional):
+
+   ```env
+   PORT=3000
+   ```
+
+## 🏃‍♂️ Running the Application
+
+### Development Mode
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+# Start in development mode with hot reload
+npm run start:dev
 ```
 
-## Run tests
+### Production Mode
 
 ```bash
-# unit tests
-$ npm run test
+# Build the application
+npm run build
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+# Start in production mode
+npm run start:prod
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### Debug Mode
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+# Start in debug mode
+npm run start:debug
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+The API will be available at:
 
-## Resources
+- **API Base URL**: `http://localhost:3000/api`
+- **Swagger Documentation**: `http://localhost:3000/docs`
 
-Check out a few resources that may come in handy when working with NestJS:
+## 📖 API Documentation
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Interactive API documentation is available via Swagger UI at `/docs` when the application is running.
 
-## Support
+The documentation includes:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- Complete endpoint descriptions
+- Request/response schemas
+- Example requests and responses
+- Parameter specifications
+- Error response formats
 
-## Stay in touch
+## 🔗 API Endpoints
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Base URL: `/api`
 
-## License
+| Method | Endpoint      | Description              | Response               |
+| ------ | ------------- | ------------------------ | ---------------------- |
+| `GET`  | `/`           | Health check endpoint    | Hello message          |
+| `GET`  | `/images`     | Get all images           | Array of image objects |
+| `GET`  | `/images/:id` | Get specific image by ID | Single image object    |
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+### Detailed Endpoint Documentation
+
+#### 1. Health Check
+
+```http
+GET /api
+```
+
+**Response:**
+
+```json
+{
+  "message": "Request successful",
+  "status": 200,
+  "data": "Hello World!"
+}
+```
+
+#### 2. Get All Images
+
+```http
+GET /api/images
+```
+
+**Response:**
+
+```json
+{
+  "message": "Request successful",
+  "status": 200,
+  "data": [
+    {
+      "id": 1,
+      "name": "sample1.jpg",
+      "url": "https://example.com/sample1.jpg"
+    },
+    {
+      "id": 2,
+      "name": "sample2.png",
+      "url": "https://example.com/sample2.png"
+    }
+  ]
+}
+```
+
+#### 3. Get Image by ID
+
+```http
+GET /api/images/:id
+```
+
+**Parameters:**
+
+- `id` (number, required) - The unique identifier of the image
+
+**Example Request:**
+
+```http
+GET /api/images/1
+```
+
+**Success Response:**
+
+```json
+{
+  "message": "Request successful",
+  "status": 200,
+  "data": {
+    "id": 1,
+    "name": "sample1.jpg",
+    "url": "https://example.com/sample1.jpg"
+  }
+}
+```
+
+**Error Response (404):**
+
+```json
+{
+  "message": "Image with id 999 not found",
+  "status": 404,
+  "error": "Not Found"
+}
+```
+
+## 📋 Response Format
+
+All API responses follow a standardized format using the `ApiResponseDto`:
+
+```typescript
+{
+  message: string;    // Response message
+  status: number;     // HTTP status code
+  data?: T;          // Response data (optional)
+  error?: string;    // Error message (only for errors)
+}
+```
+
+### Success Response Structure
+
+```json
+{
+  "message": "Request successful",
+  "status": 200,
+  "data": {
+    /* response data */
+  }
+}
+```
+
+### Error Response Structure
+
+```json
+{
+  "message": "Error description",
+  "status": 404,
+  "error": "Not Found"
+}
+```
+
+## ⚠️ Error Handling
+
+The API implements comprehensive error handling:
+
+- **400 Bad Request** - Invalid request parameters
+- **404 Not Found** - Resource not found
+- **500 Internal Server Error** - Server-side errors
+
+All errors are caught by the global `HttpExceptionFilter` and returned in the standardized response format.
+
+## 🧪 Testing
+
+### Unit Tests
+
+```bash
+# Run unit tests
+npm run test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage
+npm run test:cov
+```
+
+### End-to-End Tests
+
+```bash
+# Run e2e tests
+npm run test:e2e
+```
+
+### Test Coverage
+
+```bash
+# Generate test coverage report
+npm run test:cov
+```
+
+## 🔧 Development
+
+### Code Formatting
+
+```bash
+# Format code with Prettier
+npm run format
+```
+
+### Linting
+
+```bash
+# Run ESLint
+npm run lint
+```
+
+### Build
+
+```bash
+# Build the application
+npm run build
+```
+
+### Project Scripts
+
+| Script                | Description                               |
+| --------------------- | ----------------------------------------- |
+| `npm run start`       | Start the application                     |
+| `npm run start:dev`   | Start in development mode with hot reload |
+| `npm run start:debug` | Start in debug mode                       |
+| `npm run start:prod`  | Start in production mode                  |
+| `npm run build`       | Build the application                     |
+| `npm run format`      | Format code with Prettier                 |
+| `npm run lint`        | Run ESLint                                |
+| `npm run test`        | Run unit tests                            |
+| `npm run test:watch`  | Run tests in watch mode                   |
+| `npm run test:cov`    | Run tests with coverage                   |
+| `npm run test:e2e`    | Run end-to-end tests                      |
+
+### Architecture Components
+
+#### Controllers
+
+- Handle HTTP requests and responses
+- Define API endpoints and routing
+- Input validation and parameter parsing
+
+#### Services
+
+- Business logic implementation
+- Data processing and manipulation
+- External service integration
+
+#### DTOs (Data Transfer Objects)
+
+- Define data structure for API requests/responses
+- Input validation schemas
+- Swagger documentation annotations
+
+#### Interceptors
+
+- Global response formatting
+- Request/response logging
+- Data transformation
+
+#### Filters
+
+- Global exception handling
+- Error response standardization
+- Custom error processing
+
+## 📄 License
+
+This project is licensed under the UNLICENSED License.
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📞 Support
+
+For support and questions, please contact the development team or create an issue in the repository.
+
+---
+
+**Built with ❤️ using NestJS**

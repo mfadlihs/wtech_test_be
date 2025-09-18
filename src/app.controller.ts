@@ -1,10 +1,5 @@
 import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiResponse,
-  ApiParam,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { AppService } from './app.service';
 import { ImageDto } from './common/dto/image.dto';
 import { ApiResponseDto } from './common/dto/api-response.dto';
@@ -53,7 +48,9 @@ export class AppController {
     status: 404,
     description: 'Image not found',
   })
-  async getImageDetail(@Param('id', ParseIntPipe) id: number): Promise<ImageDto> {
+  async getImageDetail(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<ImageDto> {
     return this.appService.getImageDetail(id);
   }
 }
